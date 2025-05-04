@@ -15,7 +15,10 @@ class aiming(Behaviour):
     def update(self):
         RBB.setRobotReceiver(self.target_robot.id)
         print("I somehow stuck at aiming!!")
-        if self.robot.aiming(self.ball_position, self.target_robot.getPosition()) :
+        isInZone = ZoneManager.isInZone(RBB.getBallPosition(), ZoneManager.getZoneFromRole(self.robot.getRole()))
+        if not isInZone:
+            return Status.FAILURE
+        elif self.robot.aiming(self.ball_position, self.target_robot.getPosition()) :
             return Status.SUCCESS
         elif ZoneManager.isInZone(RBB.getBallPosition(), ZoneManager.getZoneFromRole(self.robot.getRole())):
             return Status.FAILURE
