@@ -16,25 +16,24 @@ from role.FielderCenterBT import FielderCenterBT
 
 class CentralBT(Selector):
     def __init__(self, robot: Robot):
-        super(CentralBT, self).__init__("Central BT", True)
+        super(CentralBT, self).__init__("Central BT", False)
         self.robot = robot
 
         if robot.getRole() in [Role.DEFENSIVE_LEFT, Role.DEFENSIVE_RIGHT]:
-            self.add_children([FielderDefenderBT(robot),
-                            #FielderRandomWalk(robot)
+            self.add_children([
+                FielderDefenderBT(robot),
                             ])
 
-        elif robot.getRole() in [Role.CENTER_LEFT, Role.CENTER_RIGHT]:
-            self.add_children([FielderCenterBT(robot),
-                            #FielderRandomWalk(robot)
-                            ])
+        # elif robot.getRole() in [Role.CENTER_LEFT, Role.CENTER_RIGHT]:
+        #     self.add_children([FielderCenterBT(robot),
+                            # ])
 
         # elif robot.getRole() in [Role.ATTACKER]:
         #     self.add_children([FielderDefenderBT(robot),
         #                     #FielderRandomWalk(robot)
         #                     ])
 
-        # elif robot.getRole() in [Role.GOALKEEPER]:
-        #     self.add_children([FielderDefenderBT(robot),
-        #                     #FielderRandomWalk(robot)
-        #                     ])
+        elif robot.getRole() in [Role.GOALKEEPER]:
+            self.add_children([
+                # FielderGoalBT(robot),
+                            ])

@@ -20,22 +20,22 @@ RobotBlackBoard.printAllInfo()
 #test area
 from component.area import ZoneManager
 
-# from utils.debugger.render_field_in_pygame import render
-# render(ZoneManager.getAllZones())
-# render(zone_manager.getAllOpponentZones())
+from utils.debugger.render_field_in_pygame import render
+render(ZoneManager.getAllZones())
+render(ZoneManager.getAllOpponentZones())
 
-# for robot in RobotBlackBoard.getRobotList("blue"):
-#     print(robot.id, ZoneManager.getZoneFromPosition(robot.position))
+for robot in RobotBlackBoard.getRobotList("blue"):
+    print(robot.id, ZoneManager.getZoneFromPosition(robot.position))
 
-print("ball: ", ZoneManager.getZoneFromPosition(RobotBlackBoard.getBallPosition()))
+# print("ball: ", ZoneManager.getZoneFromPosition(RobotBlackBoard.getBallPosition()))
 
-robot = RobotBlackBoard.getRobot("blue", 0)
-ball = RobotBlackBoard.getBallPosition()
+# robot = RobotBlackBoard.getRobot("blue", 0)
+# ball = RobotBlackBoard.getBallPosition()
 
-print(robot.getPosition())
+# print(robot.getPosition())
 
-while not robot.nearPoint(ball):
-    robot.goToBall()
+# while not robot.nearPoint(ball):
+#     robot.goToBall()
 # from utils.debugger.render_field_in_pygame import render
 # render(ZoneManager.getAllZones())
 

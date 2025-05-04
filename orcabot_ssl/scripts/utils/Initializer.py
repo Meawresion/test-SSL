@@ -54,7 +54,7 @@ class Initializer():
             Initializer.sub_data_received = True
 
         sub = rospy.Subscriber("/vision", SSL_DetectionFrame, __updateRobotsData) # type: ignore
-        rospy.init_node("detect", anonymous=False)
+        rospy.init_node("detect1", anonymous=False)
 
         retry = True
         timeout = 3

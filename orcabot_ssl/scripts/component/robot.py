@@ -50,7 +50,7 @@ class Robot:
 
         #end dwa
 
-        rospy.init_node("detect", anonymous=False)
+        rospy.init_node("detect1", anonymous=False)
 
     def __str__(self):
         return str("Robot: {} -> {}".format(self.id, self.position))
@@ -62,6 +62,9 @@ class Robot:
 
     def updatePub(self):
         self.pub = rospy.Publisher(f'/robot_{self.team}_{self.id}/cmd', SSL, queue_size=10)
+
+    def halt(self):
+        self.sendCommand
 
     # Define the motion model
     def motion(self, state: np.array, control_input: list, dt: float) -> np.array:

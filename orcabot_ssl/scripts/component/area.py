@@ -33,11 +33,9 @@ class ZoneManager():
             [goal_x, goal_y] = RobotBlackBoard.getConfig("field", "goal_size")
             team_offset = 1 if RobotBlackBoard.getConfig("match", "teams").index(RobotBlackBoard.getConfig("match", "our_team")) == 0 else -1
 
-            x_without_goal = x - goal_x*2
-
-            drange = x_without_goal/ff * df
-            crange = x_without_goal/ff * cf
-            arange = x_without_goal/ff * af
+            drange = x/ff * df
+            crange = x/ff * cf
+            arange = x/ff * af
 
             def getEvaluatedPositionForSpecificTeam(input_dict: dict, team_offset: int) -> dict:
                 if team_offset == 1:
@@ -62,44 +60,44 @@ class ZoneManager():
 
             Zone_def = {
                 "goal": {
+                    "x_min": -x / 2 - 180,
+                    "x_max": -x / 2,
+                    "y_min": -goal_y / 2 - 500,
+                    "y_max": goal_y / 2 + 500
+                },
+                "goalkeeper": {
                     "x_min": -x / 2,
                     "x_max": -x / 2 + goal_x,
                     "y_min": -goal_y / 2,
                     "y_max": goal_y / 2
                 },
-                "goalkeeper": {
-                    "x_min": -x / 2 + goal_x,
-                    "x_max": -x / 2 + goal_x + drange / 2,
-                    "y_min": -goal_y / 2,
-                    "y_max": goal_y / 2
-                },
                 "defensive_left": {
-                    "x_min": -x / 2 + goal_x,
-                    "x_max": -x / 2 + goal_x + drange,
+                    "x_min": -x / 2 ,
+                    "x_max": -x / 2 + drange,
                     "y_min": 0,
                     "y_max": y / 2
                 },
                 "defensive_right": {
-                    "x_min": -x / 2 + goal_x,
-                    "x_max": -x / 2 + goal_x + drange,
+                    "x_min": -x / 2,
+                    "x_max": -x / 2 + drange,
                     "y_min": -y / 2,
                     "y_max": 0
                 },
                 "center_left": {
-                    "x_min": -x / 2 + goal_x + drange,
-                    "x_max": -x / 2 + goal_x + drange + crange,
+                    "x_min": -x / 2 + drange,
+                    "x_max": -x / 2 + drange + crange,
                     "y_min": 0,
                     "y_max": y / 2
                 },
                 "center_right": {
-                    "x_min": -x / 2 + goal_x + drange,
-                    "x_max": -x / 2 + goal_x + drange + crange,
+                    "x_min": -x / 2 + drange,
+                    "x_max": -x / 2 + drange + crange,
                     "y_min": -y / 2,
                     "y_max": 0
                 },
                 "attacking": {
-                    "x_min": -x / 2 + goal_x + drange + crange,
-                    "x_max": -x / 2 + goal_x + drange + crange + arange,
+                    "x_min": -x / 2 + drange + crange,
+                    "x_max": -x / 2 + drange + crange + arange,
                     "y_min": -y / 2,
                     "y_max": y / 2
                 }

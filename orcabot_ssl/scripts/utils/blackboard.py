@@ -7,8 +7,11 @@ from component.robotEx import RobotDict, RobotList
 
 from utils.colors import Colors
 from typing import Tuple, List
+from types import SimpleNamespace
 
 import traceback
+
+from utils.referee import GameState
 
 class RobotBlackBoard():
     _initialized = False
@@ -46,6 +49,19 @@ class RobotBlackBoard():
             cls._bb_manager.register_key(key="gamestate", access=Access.READ)
             cls._bb_manager.gamestate = dict()
 
+            # cls._bb_param = SimpleNamespace()
+            # cls._bb_manager = SimpleNamespace()
+
+            # cls._bb_manager.parameters = dict()
+
+            cls._bb_manager.robots = RobotDict()
+            cls._bb_manager.robots["yellow"] = RobotList("yellow", 6)
+            cls._bb_manager.robots["blue"] = RobotList("blue", 6)
+
+            cls._bb_manager.ball = Position(0, 0)
+
+            cls._bb_manager.gamestate = dict()
+
         return super().__new__(cls)
 
     @staticmethod
@@ -68,6 +84,7 @@ class RobotBlackBoard():
             "team_has_ball": None,
             "opponent_has_ball": False,
             "prev_ball_possesion": None,
+            "current_state": None, # Stop, Halt, Normal Start, Kick-Off, Free kick, Force Start, Penalty Kick
         }
 
     @staticmethod
@@ -164,7 +181,8 @@ class RobotBlackBoard():
 
     @staticmethod
     def setRobotShooterID(rid: int) -> None:
-        RobotBlackBoard._bb_manager.gamestate["shooter_id"] = rid
+        if rid != RobotBlackBoard.getRobotShooterID():
+            RobotBlackBoard._bb_manager.gamestate["shooter_id"] = rid
 
     @staticmethod
     def getIsRobotReceiver(rid: int) -> Tuple[bool, int]:
@@ -205,5 +223,13 @@ class RobotBlackBoard():
     @staticmethod
     def setPreviousBallPossession(rid: int) -> None:
         RobotBlackBoard._bb_manager.gamestate["prev_ball_possesion"] = rid
+
+    @staticmethod
+    def getGameState() -> GameState:
+        return RobotBlackBoard._bb_manager.gamestate["current_state"]
+    
+    @staticmethod
+    def setGameState(state: GameState) -> None:
+        RobotBlackBoard._bb_manager.gamestate["current_state"] = state
 
 RobotBlackBoard()

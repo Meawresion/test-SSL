@@ -76,6 +76,6 @@ def updateGameState() -> None:
 
 
 # end of file
-import main
-main.main()
+# import main
+# main.main()
 print(Colors.OKGREEN + "[Orcabot SSL] The script has been executed successfully.")

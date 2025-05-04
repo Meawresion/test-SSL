@@ -60,7 +60,9 @@ def main():
     #     time.sleep(1)
 
 
-def updateRole():
-    for robot in RobotBlackBoard.getRobotList("blue"):
-        print(robot.getRole())
-        pass
+# def updateRole():
+#     for robot in RobotBlackBoard.getRobotList("blue"):
+#         print(robot.getRole())
+#         pass
+
+main()
